@@ -5,18 +5,21 @@
     Basal:  22
     Using $ locks a value in when extending/dragging a formula across multiple
     cells.
-*/
 
-// Current formula
-=IF( (B2>Settings!C$1) , ((B2-Settings!C$1)/Settings!C$2+(C2/Settings!C$3)) , (((B2-Settings!B$1)/Settings!C$2)+(C2/Settings!C$3)))
+    Calculator cells, start in row 2 due to headings
+    A: Date
+    B: BG (Blood glucose reading)
+    C: CHO (Grams of carbohydrates intended for ingestion)
+    D: Calculated units column for fast-acting insulin
+*/
 
 
 // Range adjustments
 =
+IF( AND(ISBLANK(B2)=true,ISBLANK(C2)=true) , "",
 IF( B2>Settings!C$1 , ((B2-Settings!C$1)/Settings!C$2)+(C2/Settings!C$3),
 IF( B2<Settings!B$1 , ((B2-Settings!B$1)/Settings!C$2)+(C2/Settings!C$3),
-IF( AND(B2>=Settings!B$1,B2<=Settings!C$1) , C2/Settings!C$3,
-IF( AND(ISBLANK(B2)=true,ISBLANK(C2)=true) , "Blank"))))
+IF( AND(B2>=Settings!B$1,B2<=Settings!C$1) , C2/Settings!C$3))))
 
 // Range test
 =
